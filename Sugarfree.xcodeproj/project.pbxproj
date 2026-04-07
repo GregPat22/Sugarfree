@@ -70,7 +70,7 @@
 		9487124C05C6ABD83C90AA82 /* BarcodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerView.swift; sourceTree = "<group>"; };
 		979FADBA48C07CFBDF5123E1 /* OpenFoodFactsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenFoodFactsServiceTests.swift; sourceTree = "<group>"; };
 		9E4B2FC30ABAFFF07AD347B9 /* ManualEntryForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualEntryForm.swift; sourceTree = "<group>"; };
-		B567B04475BDB071F6BC6012 /* Sugarfree.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Sugarfree.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B567B04475BDB071F6BC6012 /* Sugarfree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sugarfree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B66A492C1DA1C0FE7D3C9FDA /* ScannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewModel.swift; sourceTree = "<group>"; };
 		BF62AD7763DCFF3D7A704D17 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		C335798D37BC7080AF15B835 /* CameraPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreview.swift; sourceTree = "<group>"; };
@@ -592,12 +592,13 @@
 				CODE_SIGN_ENTITLEMENTS = Sugarfree/Sugarfree.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZPVWV33FHF;
 				INFOPLIST_FILE = Sugarfree/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sugarfree.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gregpatini.sugarfree;
 				PRODUCT_NAME = Sugarfree;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -627,12 +628,13 @@
 				CODE_SIGN_ENTITLEMENTS = Sugarfree/Sugarfree.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZPVWV33FHF;
 				INFOPLIST_FILE = Sugarfree/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sugarfree.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gregpatini.sugarfree;
 				PRODUCT_NAME = Sugarfree;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
