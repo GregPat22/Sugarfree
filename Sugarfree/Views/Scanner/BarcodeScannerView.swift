@@ -76,10 +76,12 @@ struct BarcodeScannerView: View {
             .task {
                 await requestCameraAccess()
                 coordinator.configure()
-                coordinator.onBarcodeDetected = { barcode in
-                    Task { await viewModel.lookupBarcode(barcode) }
-                }
                 coordinator.start()
+            }
+            .onChange(of: coordinator.detectedBarcode) { _, barcode in
+                guard let barcode else { return }
+                coordinator.stop()
+                Task { await viewModel.lookupBarcode(barcode) }
             }
             .onDisappear {
                 coordinator.stop()

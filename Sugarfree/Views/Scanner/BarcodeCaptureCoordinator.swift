@@ -1,11 +1,15 @@
 import AVFoundation
 import UIKit
 
-final class BarcodeCaptureCoordinator: NSObject, AVCaptureMetadataOutputObjectsDelegate, @unchecked Sendable {
-    let session = AVCaptureSession()
-    var onBarcodeDetected: ((String) -> Void)?
+@MainActor
+@Observable
+final class BarcodeCaptureCoordinator {
+    var detectedBarcode: String?
 
+    private(set) var session = AVCaptureSession()
     private var isConfigured = false
+    private let delegate = MetadataDelegate()
+
     private let supportedTypes: [AVMetadataObject.ObjectType] = [
         .ean13, .ean8, .upce, .code128, .code39, .code93, .itf14
     ]
@@ -14,49 +18,72 @@ final class BarcodeCaptureCoordinator: NSObject, AVCaptureMetadataOutputObjectsD
         guard !isConfigured else { return }
         isConfigured = true
 
-        session.beginConfiguration()
-        defer { session.commitConfiguration() }
+        delegate.onDetected = { [weak self] barcode in
+            Task { @MainActor in
+                self?.detectedBarcode = barcode
+            }
+        }
 
-        guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back),
-              let input = try? AVCaptureDeviceInput(device: device),
-              session.canAddInput(input) else { return }
+        let captureSession = session
+        let metadataDelegate = delegate
+        let types = supportedTypes
 
-        session.addInput(input)
+        DispatchQueue.global(qos: .userInitiated).async {
+            captureSession.beginConfiguration()
+            defer { captureSession.commitConfiguration() }
 
-        let metadataOutput = AVCaptureMetadataOutput()
-        guard session.canAddOutput(metadataOutput) else { return }
+            guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back),
+                  let input = try? AVCaptureDeviceInput(device: device),
+                  captureSession.canAddInput(input) else { return }
 
-        session.addOutput(metadataOutput)
-        metadataOutput.setMetadataObjectsDelegate(self, queue: .main)
-        metadataOutput.metadataObjectTypes = supportedTypes.filter {
-            metadataOutput.availableMetadataObjectTypes.contains($0)
+            captureSession.addInput(input)
+
+            let metadataOutput = AVCaptureMetadataOutput()
+            guard captureSession.canAddOutput(metadataOutput) else { return }
+
+            captureSession.addOutput(metadataOutput)
+            metadataOutput.setMetadataObjectsDelegate(metadataDelegate, queue: .main)
+            metadataOutput.metadataObjectTypes = types.filter {
+                metadataOutput.availableMetadataObjectTypes.contains($0)
+            }
         }
     }
 
     func start() {
-        guard !session.isRunning else { return }
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            self?.session.startRunning()
+        detectedBarcode = nil
+        let captureSession = session
+        DispatchQueue.global(qos: .userInitiated).async {
+            guard !captureSession.isRunning else { return }
+            captureSession.startRunning()
         }
     }
 
     func stop() {
-        guard session.isRunning else { return }
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            self?.session.stopRunning()
+        let captureSession = session
+        DispatchQueue.global(qos: .userInitiated).async {
+            guard captureSession.isRunning else { return }
+            captureSession.stopRunning()
         }
     }
+}
+
+private final class MetadataDelegate: NSObject, AVCaptureMetadataOutputObjectsDelegate, @unchecked Sendable {
+    var onDetected: ((String) -> Void)?
+    private var lastDetection = Date.distantPast
 
     func metadataOutput(
         _ output: AVCaptureMetadataOutput,
         didOutput metadataObjects: [AVMetadataObject],
         from connection: AVCaptureConnection
     ) {
+        let now = Date.now
+        guard now.timeIntervalSince(lastDetection) > 1.0 else { return }
+
         guard let object = metadataObjects.first as? AVMetadataMachineReadableCodeObject,
               let barcode = object.stringValue else { return }
 
-        stop()
+        lastDetection = now
         UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-        onBarcodeDetected?(barcode)
+        onDetected?(barcode)
     }
 }

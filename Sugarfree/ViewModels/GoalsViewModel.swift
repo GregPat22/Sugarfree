@@ -2,6 +2,7 @@ import Foundation
 import SwiftData
 import Observation
 
+@MainActor
 @Observable
 final class GoalsViewModel {
     var dailyLimit: Double = 25.0

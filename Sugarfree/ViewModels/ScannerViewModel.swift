@@ -10,6 +10,7 @@ enum ScannerState: Equatable {
     case error(String)
 }
 
+@MainActor
 @Observable
 final class ScannerViewModel {
     var state: ScannerState = .scanning

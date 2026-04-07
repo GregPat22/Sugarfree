@@ -1,6 +1,6 @@
 import Foundation
 
-struct OpenFoodFactsService {
+struct OpenFoodFactsService: Sendable {
     private let baseURL = URL(string: "https://world.openfoodfacts.org/api/v2")!
 
     func fetchProduct(barcode: String) async throws -> ProductResult {
