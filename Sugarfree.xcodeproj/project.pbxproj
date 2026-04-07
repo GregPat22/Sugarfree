@@ -10,19 +10,25 @@
 		0DF7A386E998257C5C6E7683 /* GoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36053AF60F315041AC976B87 /* GoalsView.swift */; };
 		0EAB8780A23A06668E6CC50C /* FoodEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6714FAE9198A392570D1CAE3 /* FoodEntry.swift */; };
 		1A390D4DBDA36F83506A561C /* SugarfreeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F5DFC31D966C38C8C125F3 /* SugarfreeUITests.swift */; };
+		2DC1DE92464007FA996CF026 /* BarcodeCaptureCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABB13C32A2FEEF3890538AF /* BarcodeCaptureCoordinator.swift */; };
 		34B6FF61C44D8C80BE9B8420 /* ScannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66A492C1DA1C0FE7D3C9FDA /* ScannerViewModel.swift */; };
 		37B378801E75CB59386B28AF /* DailyLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23796D727FF129BDCE4B305B /* DailyLog.swift */; };
 		47356EDB38D313C9A44E18E0 /* OpenFoodFactsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F482642F203EB361479B766B /* OpenFoodFactsService.swift */; };
 		52A343482765241F36BD553F /* OpenFoodFactsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979FADBA48C07CFBDF5123E1 /* OpenFoodFactsServiceTests.swift */; };
 		690C1A254C14EEC1B33AF24C /* SugarfreeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163589D05C22FE346DED8E40 /* SugarfreeApp.swift */; };
+		6C85C78FB622CEF21E974276 /* SugarGauge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B454FDDB3A109ECD112B8B3 /* SugarGauge.swift */; };
 		7341FC909CC6F6EF6D1ABDE6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07480D2AB376C643731AADB /* ContentView.swift */; };
 		815623AB331C1CC3FB03FAB7 /* TrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839A81F6343F3FA00C7C7F7D /* TrackerView.swift */; };
+		8B1F107B67CAC98B16B2FF3D /* CameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C335798D37BC7080AF15B835 /* CameraPreview.swift */; };
+		94E48E7B46994310082377AB /* ManualEntryForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4B2FC30ABAFFF07AD347B9 /* ManualEntryForm.swift */; };
+		A7666B5155604E2D4E911085 /* StreakBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A5FF78B66CF2D0E70DFD4C /* StreakBadge.swift */; };
 		AA53DD0BC1B8CF9C3FE8927F /* SugarGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFFC596B90C27A9B01A1516 /* SugarGoal.swift */; };
 		AE0862C089C61A44078C0B79 /* BarcodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9487124C05C6ABD83C90AA82 /* BarcodeScannerView.swift */; };
 		B25A684009A709EB7D0349B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08A100FE30499384E26CF6AE /* Assets.xcassets */; };
 		C74F6972B8797080CF970E71 /* GoalsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BD831BF14BEBD22D3843D0 /* GoalsViewModel.swift */; };
 		DB8E8D39EE08F410459BE94E /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F055A8B092AFAB0C8ABE5CB /* DashboardViewModel.swift */; };
 		DD390856706D87AD53837447 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF62AD7763DCFF3D7A704D17 /* DashboardView.swift */; };
+		E16E4DAA855F16D7D8CB0FBD /* ProductResultCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F18314D297CB8C883FDBB0 /* ProductResultCard.swift */; };
 		E9D559D3AC0EE271B70BCE8A /* NutritionModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7F9601FB138C5243B465D2 /* NutritionModels.swift */; };
 		F58B7684DED1BBE6B9EC5B0A /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDBD80BE235CBBB5EC12B54 /* Date+Extensions.swift */; };
 /* End PBXBuildFile section */
@@ -48,10 +54,14 @@
 		08A100FE30499384E26CF6AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		163589D05C22FE346DED8E40 /* SugarfreeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SugarfreeApp.swift; sourceTree = "<group>"; };
 		23796D727FF129BDCE4B305B /* DailyLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyLog.swift; sourceTree = "<group>"; };
+		2B454FDDB3A109ECD112B8B3 /* SugarGauge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SugarGauge.swift; sourceTree = "<group>"; };
 		31A32B4DA0CEEC75380FCF6D /* SugarfreeTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = SugarfreeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		36053AF60F315041AC976B87 /* GoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsView.swift; sourceTree = "<group>"; };
+		39A5FF78B66CF2D0E70DFD4C /* StreakBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakBadge.swift; sourceTree = "<group>"; };
 		3F055A8B092AFAB0C8ABE5CB /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
 		46B061620BC1C09CF88699CB /* Sugarfree.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sugarfree.entitlements; sourceTree = "<group>"; };
+		4ABB13C32A2FEEF3890538AF /* BarcodeCaptureCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeCaptureCoordinator.swift; sourceTree = "<group>"; };
+		52F18314D297CB8C883FDBB0 /* ProductResultCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductResultCard.swift; sourceTree = "<group>"; };
 		56BD831BF14BEBD22D3843D0 /* GoalsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsViewModel.swift; sourceTree = "<group>"; };
 		6714FAE9198A392570D1CAE3 /* FoodEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntry.swift; sourceTree = "<group>"; };
 		7EDBD80BE235CBBB5EC12B54 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
@@ -59,9 +69,11 @@
 		84F5DFC31D966C38C8C125F3 /* SugarfreeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SugarfreeUITests.swift; sourceTree = "<group>"; };
 		9487124C05C6ABD83C90AA82 /* BarcodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerView.swift; sourceTree = "<group>"; };
 		979FADBA48C07CFBDF5123E1 /* OpenFoodFactsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenFoodFactsServiceTests.swift; sourceTree = "<group>"; };
+		9E4B2FC30ABAFFF07AD347B9 /* ManualEntryForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualEntryForm.swift; sourceTree = "<group>"; };
 		B567B04475BDB071F6BC6012 /* Sugarfree.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Sugarfree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B66A492C1DA1C0FE7D3C9FDA /* ScannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewModel.swift; sourceTree = "<group>"; };
 		BF62AD7763DCFF3D7A704D17 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		C335798D37BC7080AF15B835 /* CameraPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreview.swift; sourceTree = "<group>"; };
 		D8118ACCF665819ABED78103 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DA7F9601FB138C5243B465D2 /* NutritionModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionModels.swift; sourceTree = "<group>"; };
 		EEFFC596B90C27A9B01A1516 /* SugarGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SugarGoal.swift; sourceTree = "<group>"; };
@@ -108,6 +120,8 @@
 			isa = PBXGroup;
 			children = (
 				BF62AD7763DCFF3D7A704D17 /* DashboardView.swift */,
+				39A5FF78B66CF2D0E70DFD4C /* StreakBadge.swift */,
+				2B454FDDB3A109ECD112B8B3 /* SugarGauge.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -143,7 +157,11 @@
 		7C991D26A13DE470F0D0ACAF /* Scanner */ = {
 			isa = PBXGroup;
 			children = (
+				4ABB13C32A2FEEF3890538AF /* BarcodeCaptureCoordinator.swift */,
 				9487124C05C6ABD83C90AA82 /* BarcodeScannerView.swift */,
+				C335798D37BC7080AF15B835 /* CameraPreview.swift */,
+				9E4B2FC30ABAFFF07AD347B9 /* ManualEntryForm.swift */,
+				52F18314D297CB8C883FDBB0 /* ProductResultCard.swift */,
 			);
 			path = Scanner;
 			sourceTree = "<group>";
@@ -354,7 +372,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DC1DE92464007FA996CF026 /* BarcodeCaptureCoordinator.swift in Sources */,
 				AE0862C089C61A44078C0B79 /* BarcodeScannerView.swift in Sources */,
+				8B1F107B67CAC98B16B2FF3D /* CameraPreview.swift in Sources */,
 				7341FC909CC6F6EF6D1ABDE6 /* ContentView.swift in Sources */,
 				37B378801E75CB59386B28AF /* DailyLog.swift in Sources */,
 				DD390856706D87AD53837447 /* DashboardView.swift in Sources */,
@@ -363,9 +383,13 @@
 				0EAB8780A23A06668E6CC50C /* FoodEntry.swift in Sources */,
 				0DF7A386E998257C5C6E7683 /* GoalsView.swift in Sources */,
 				C74F6972B8797080CF970E71 /* GoalsViewModel.swift in Sources */,
+				94E48E7B46994310082377AB /* ManualEntryForm.swift in Sources */,
 				E9D559D3AC0EE271B70BCE8A /* NutritionModels.swift in Sources */,
 				47356EDB38D313C9A44E18E0 /* OpenFoodFactsService.swift in Sources */,
+				E16E4DAA855F16D7D8CB0FBD /* ProductResultCard.swift in Sources */,
 				34B6FF61C44D8C80BE9B8420 /* ScannerViewModel.swift in Sources */,
+				A7666B5155604E2D4E911085 /* StreakBadge.swift in Sources */,
+				6C85C78FB622CEF21E974276 /* SugarGauge.swift in Sources */,
 				AA53DD0BC1B8CF9C3FE8927F /* SugarGoal.swift in Sources */,
 				690C1A254C14EEC1B33AF24C /* SugarfreeApp.swift in Sources */,
 				815623AB331C1CC3FB03FAB7 /* TrackerView.swift in Sources */,

@@ -8,16 +8,57 @@ final class GoalsViewModel {
     var currentStreak: Int = 0
     var longestStreak: Int = 0
     var hasActiveGoal = false
+    var startDate: Date = .now
+    var daysOnPlan: Int = 0
 
-    // TODO: Load the active SugarGoal from SwiftData
     func loadGoal(context: ModelContext) {
+        let predicate = #Predicate<SugarGoal> { $0.isActive }
+        let descriptor = FetchDescriptor(predicate: predicate)
+
+        if let goal = try? context.fetch(descriptor).first {
+            dailyLimit = goal.dailyLimitGrams
+            currentStreak = goal.currentStreakDays
+            longestStreak = goal.longestStreakDays
+            startDate = goal.startDate
+            hasActiveGoal = true
+
+            let days = Calendar.current.dateComponents([.day], from: goal.startDate, to: .now).day ?? 0
+            daysOnPlan = max(0, days)
+        } else {
+            createDefaultGoal(context: context)
+        }
     }
 
-    // TODO: Create or update the user's sugar goal
-    func saveGoal(limit: Double, context: ModelContext) {
+    func updateLimit(_ newLimit: Double, context: ModelContext) {
+        dailyLimit = newLimit
+
+        let predicate = #Predicate<SugarGoal> { $0.isActive }
+        let descriptor = FetchDescriptor(predicate: predicate)
+
+        if let goal = try? context.fetch(descriptor).first {
+            goal.dailyLimitGrams = newLimit
+        }
     }
 
-    // TODO: Recalculate streak based on DailyLog history
-    func recalculateStreak(context: ModelContext) {
+    func resetStreak(context: ModelContext) {
+        let predicate = #Predicate<SugarGoal> { $0.isActive }
+        let descriptor = FetchDescriptor(predicate: predicate)
+
+        if let goal = try? context.fetch(descriptor).first {
+            goal.currentStreakDays = 0
+            goal.startDate = .now
+            currentStreak = 0
+            startDate = .now
+            daysOnPlan = 0
+        }
+    }
+
+    private func createDefaultGoal(context: ModelContext) {
+        let goal = SugarGoal(dailyLimitGrams: 25.0)
+        context.insert(goal)
+        dailyLimit = 25.0
+        hasActiveGoal = true
+        startDate = goal.startDate
+        daysOnPlan = 0
     }
 }

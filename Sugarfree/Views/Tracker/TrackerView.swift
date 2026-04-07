@@ -7,6 +7,19 @@ struct TrackerView: View {
 
     @State private var showAddEntry = false
 
+    private var groupedEntries: [(String, [FoodEntry])] {
+        let calendar = Calendar.current
+        let grouped = Dictionary(grouping: entries) { entry in
+            calendar.startOfDay(for: entry.timestamp)
+        }
+        return grouped
+            .sorted { $0.key > $1.key }
+            .map { (dateKey, items) in
+                let label = dateLabel(for: dateKey)
+                return (label, items.sorted { $0.timestamp > $1.timestamp })
+            }
+    }
+
     var body: some View {
         NavigationStack {
             Group {
@@ -18,22 +31,23 @@ struct TrackerView: View {
                     )
                 } else {
                     List {
-                        // TODO: Group entries by date, show sugar per entry
-                        ForEach(entries) { entry in
-                            HStack {
-                                VStack(alignment: .leading) {
-                                    Text(entry.name)
-                                        .font(.headline)
-                                    if let brand = entry.brand {
-                                        Text(brand)
-                                            .font(.caption)
-                                            .foregroundStyle(.secondary)
-                                    }
+                        ForEach(groupedEntries, id: \.0) { section in
+                            Section {
+                                ForEach(section.1) { entry in
+                                    entryRow(entry)
                                 }
-                                Spacer()
-                                Text("\(entry.sugarGrams, specifier: "%.1f")g")
-                                    .font(.title3.monospacedDigit())
-                                    .foregroundStyle(entry.sugarGrams > 10 ? .red : .primary)
+                                .onDelete { offsets in
+                                    deleteEntries(offsets, from: section.1)
+                                }
+                            } header: {
+                                HStack {
+                                    Text(section.0)
+                                    Spacer()
+                                    let total = section.1.reduce(0.0) { $0 + $1.sugarGrams }
+                                    Text("\(total, specifier: "%.1f")g total")
+                                        .font(.caption.monospacedDigit())
+                                        .foregroundStyle(.secondary)
+                                }
                             }
                         }
                     }
@@ -50,10 +64,62 @@ struct TrackerView: View {
                 }
             }
             .sheet(isPresented: $showAddEntry) {
-                // TODO: Manual entry form
-                Text("Add Entry Form")
+                ManualEntryForm()
             }
         }
+    }
+
+    private func entryRow(_ entry: FoodEntry) -> some View {
+        HStack(spacing: 12) {
+            Image(systemName: entry.isManualEntry ? "pencil.circle.fill" : "barcode.viewfinder")
+                .font(.title3)
+                .foregroundStyle(entry.isManualEntry ? .blue : .green)
+                .frame(width: 28)
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(entry.name)
+                    .font(.subheadline.weight(.medium))
+
+                HStack(spacing: 4) {
+                    if let brand = entry.brand {
+                        Text(brand)
+                    }
+                    if let serving = entry.servingSize {
+                        if entry.brand != nil { Text("·") }
+                        Text(serving)
+                    }
+                }
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .lineLimit(1)
+            }
+
+            Spacer()
+
+            VStack(alignment: .trailing, spacing: 2) {
+                Text("\(entry.sugarGrams, specifier: "%.1f")g")
+                    .font(.subheadline.monospacedDigit().weight(.semibold))
+                    .foregroundStyle(entry.sugarGrams > 10 ? .red : .primary)
+
+                Text(entry.timestamp, format: .dateTime.hour().minute())
+                    .font(.caption2)
+                    .foregroundStyle(.tertiary)
+            }
+        }
+        .padding(.vertical, 2)
+    }
+
+    private func deleteEntries(_ offsets: IndexSet, from sectionEntries: [FoodEntry]) {
+        for index in offsets {
+            modelContext.delete(sectionEntries[index])
+        }
+    }
+
+    private func dateLabel(for date: Date) -> String {
+        let calendar = Calendar.current
+        if calendar.isDateInToday(date) { return "Today" }
+        if calendar.isDateInYesterday(date) { return "Yesterday" }
+        return date.formatted(.dateTime.weekday(.wide).month().day())
     }
 }
 
