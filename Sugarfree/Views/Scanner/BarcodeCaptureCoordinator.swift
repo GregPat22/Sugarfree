@@ -6,9 +6,12 @@ import UIKit
 final class BarcodeCaptureCoordinator {
     var detectedBarcode: String?
 
-    private(set) var session = AVCaptureSession()
+    // AVCaptureSession is thread-safe internally and must run on a background
+    // queue, so we opt out of actor isolation for this property.
+    nonisolated(unsafe) let session = AVCaptureSession()
+
     private var isConfigured = false
-    private let delegate = MetadataDelegate()
+    private nonisolated(unsafe) let delegate = MetadataDelegate()
 
     private let supportedTypes: [AVMetadataObject.ObjectType] = [
         .ean13, .ean8, .upce, .code128, .code39, .code93, .itf14
