@@ -89,10 +89,7 @@ struct BarcodeScannerView: View {
         coordinator.onBarcodeDetected = { @MainActor barcode in
             Task { await viewModel.lookupBarcode(barcode) }
         }
-        DispatchQueue.global(qos: .userInitiated).async {
-            coordinator.configure()
-            coordinator.start()
-        }
+        coordinator.configureAndStart()
     }
 
     // MARK: - Camera

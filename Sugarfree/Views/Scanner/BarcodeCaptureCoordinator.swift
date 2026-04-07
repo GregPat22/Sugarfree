@@ -12,26 +12,36 @@ final class BarcodeCaptureCoordinator: NSObject, AVCaptureMetadataOutputObjectsD
         .ean13, .ean8, .upce, .code128, .code39, .code93, .itf14
     ]
 
-    func configure() {
+    func configureAndStart() {
         guard !isConfigured else { return }
         isConfigured = true
 
-        session.beginConfiguration()
-        defer { session.commitConfiguration() }
+        DispatchQueue.global(qos: .userInitiated).async { [self] in
+            session.beginConfiguration()
 
-        guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back),
-              let input = try? AVCaptureDeviceInput(device: device),
-              session.canAddInput(input) else { return }
+            guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back),
+                  let input = try? AVCaptureDeviceInput(device: device),
+                  session.canAddInput(input) else {
+                session.commitConfiguration()
+                return
+            }
 
-        session.addInput(input)
+            session.addInput(input)
 
-        let metadataOutput = AVCaptureMetadataOutput()
-        guard session.canAddOutput(metadataOutput) else { return }
+            let metadataOutput = AVCaptureMetadataOutput()
+            guard session.canAddOutput(metadataOutput) else {
+                session.commitConfiguration()
+                return
+            }
 
-        session.addOutput(metadataOutput)
-        metadataOutput.setMetadataObjectsDelegate(self, queue: .main)
-        metadataOutput.metadataObjectTypes = supportedTypes.filter {
-            metadataOutput.availableMetadataObjectTypes.contains($0)
+            session.addOutput(metadataOutput)
+            metadataOutput.setMetadataObjectsDelegate(self, queue: .main)
+            metadataOutput.metadataObjectTypes = supportedTypes.filter {
+                metadataOutput.availableMetadataObjectTypes.contains($0)
+            }
+
+            session.commitConfiguration()
+            session.startRunning()
         }
     }
 
