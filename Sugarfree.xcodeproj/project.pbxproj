@@ -1,0 +1,676 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0DF7A386E998257C5C6E7683 /* GoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36053AF60F315041AC976B87 /* GoalsView.swift */; };
+		0EAB8780A23A06668E6CC50C /* FoodEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6714FAE9198A392570D1CAE3 /* FoodEntry.swift */; };
+		1A390D4DBDA36F83506A561C /* SugarfreeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F5DFC31D966C38C8C125F3 /* SugarfreeUITests.swift */; };
+		34B6FF61C44D8C80BE9B8420 /* ScannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66A492C1DA1C0FE7D3C9FDA /* ScannerViewModel.swift */; };
+		37B378801E75CB59386B28AF /* DailyLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23796D727FF129BDCE4B305B /* DailyLog.swift */; };
+		47356EDB38D313C9A44E18E0 /* OpenFoodFactsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F482642F203EB361479B766B /* OpenFoodFactsService.swift */; };
+		52A343482765241F36BD553F /* OpenFoodFactsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979FADBA48C07CFBDF5123E1 /* OpenFoodFactsServiceTests.swift */; };
+		690C1A254C14EEC1B33AF24C /* SugarfreeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163589D05C22FE346DED8E40 /* SugarfreeApp.swift */; };
+		7341FC909CC6F6EF6D1ABDE6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07480D2AB376C643731AADB /* ContentView.swift */; };
+		815623AB331C1CC3FB03FAB7 /* TrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839A81F6343F3FA00C7C7F7D /* TrackerView.swift */; };
+		AA53DD0BC1B8CF9C3FE8927F /* SugarGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFFC596B90C27A9B01A1516 /* SugarGoal.swift */; };
+		AE0862C089C61A44078C0B79 /* BarcodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9487124C05C6ABD83C90AA82 /* BarcodeScannerView.swift */; };
+		B25A684009A709EB7D0349B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08A100FE30499384E26CF6AE /* Assets.xcassets */; };
+		C74F6972B8797080CF970E71 /* GoalsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BD831BF14BEBD22D3843D0 /* GoalsViewModel.swift */; };
+		DB8E8D39EE08F410459BE94E /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F055A8B092AFAB0C8ABE5CB /* DashboardViewModel.swift */; };
+		DD390856706D87AD53837447 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF62AD7763DCFF3D7A704D17 /* DashboardView.swift */; };
+		E9D559D3AC0EE271B70BCE8A /* NutritionModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7F9601FB138C5243B465D2 /* NutritionModels.swift */; };
+		F58B7684DED1BBE6B9EC5B0A /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDBD80BE235CBBB5EC12B54 /* Date+Extensions.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5A8A76624689AB130D3CE3CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 986537778880F2CC866F6973 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DDB155A10877F12B42F184F;
+			remoteInfo = Sugarfree;
+		};
+		854C31007F46373F83BB1156 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 986537778880F2CC866F6973 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DDB155A10877F12B42F184F;
+			remoteInfo = Sugarfree;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		08A100FE30499384E26CF6AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		163589D05C22FE346DED8E40 /* SugarfreeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SugarfreeApp.swift; sourceTree = "<group>"; };
+		23796D727FF129BDCE4B305B /* DailyLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyLog.swift; sourceTree = "<group>"; };
+		31A32B4DA0CEEC75380FCF6D /* SugarfreeTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = SugarfreeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		36053AF60F315041AC976B87 /* GoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsView.swift; sourceTree = "<group>"; };
+		3F055A8B092AFAB0C8ABE5CB /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
+		46B061620BC1C09CF88699CB /* Sugarfree.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sugarfree.entitlements; sourceTree = "<group>"; };
+		56BD831BF14BEBD22D3843D0 /* GoalsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsViewModel.swift; sourceTree = "<group>"; };
+		6714FAE9198A392570D1CAE3 /* FoodEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntry.swift; sourceTree = "<group>"; };
+		7EDBD80BE235CBBB5EC12B54 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		839A81F6343F3FA00C7C7F7D /* TrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerView.swift; sourceTree = "<group>"; };
+		84F5DFC31D966C38C8C125F3 /* SugarfreeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SugarfreeUITests.swift; sourceTree = "<group>"; };
+		9487124C05C6ABD83C90AA82 /* BarcodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerView.swift; sourceTree = "<group>"; };
+		979FADBA48C07CFBDF5123E1 /* OpenFoodFactsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenFoodFactsServiceTests.swift; sourceTree = "<group>"; };
+		B567B04475BDB071F6BC6012 /* Sugarfree.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Sugarfree.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B66A492C1DA1C0FE7D3C9FDA /* ScannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewModel.swift; sourceTree = "<group>"; };
+		BF62AD7763DCFF3D7A704D17 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		D8118ACCF665819ABED78103 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		DA7F9601FB138C5243B465D2 /* NutritionModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionModels.swift; sourceTree = "<group>"; };
+		EEFFC596B90C27A9B01A1516 /* SugarGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SugarGoal.swift; sourceTree = "<group>"; };
+		F07480D2AB376C643731AADB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F482642F203EB361479B766B /* OpenFoodFactsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenFoodFactsService.swift; sourceTree = "<group>"; };
+		FDDD3BB07C7BED5C67271714 /* SugarfreeUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = SugarfreeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0F547150F8BF89D239445A32 /* Goals */ = {
+			isa = PBXGroup;
+			children = (
+				36053AF60F315041AC976B87 /* GoalsView.swift */,
+			);
+			path = Goals;
+			sourceTree = "<group>";
+		};
+		31780DF0626532B29EE8FA7B /* Sugarfree */ = {
+			isa = PBXGroup;
+			children = (
+				EBFA710CC1F1101D1892D2E2 /* App */,
+				9664A7E9BEAADAE07CE501BB /* Models */,
+				E25BF6713DC84B3CFBE0B499 /* Resources */,
+				E8A93A892B6A156B507E3D0B /* Services */,
+				EDBE2906C02F66F17490B9B1 /* Utilities */,
+				F5B74772F8D91EF3F92AB184 /* ViewModels */,
+				6794CCC138C970E7FA54906B /* Views */,
+				46B061620BC1C09CF88699CB /* Sugarfree.entitlements */,
+			);
+			path = Sugarfree;
+			sourceTree = "<group>";
+		};
+		43C3BA6AA6A3D8FA26735D31 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B567B04475BDB071F6BC6012 /* Sugarfree.app */,
+				31A32B4DA0CEEC75380FCF6D /* SugarfreeTests.xctest */,
+				FDDD3BB07C7BED5C67271714 /* SugarfreeUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		449A3B9017F521258CCB4C13 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				BF62AD7763DCFF3D7A704D17 /* DashboardView.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		44B9AC15DB06539A23F542B0 /* SugarfreeUITests */ = {
+			isa = PBXGroup;
+			children = (
+				84F5DFC31D966C38C8C125F3 /* SugarfreeUITests.swift */,
+			);
+			path = SugarfreeUITests;
+			sourceTree = "<group>";
+		};
+		6794CCC138C970E7FA54906B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				449A3B9017F521258CCB4C13 /* Dashboard */,
+				0F547150F8BF89D239445A32 /* Goals */,
+				7C991D26A13DE470F0D0ACAF /* Scanner */,
+				D9D3A0EEF28A43909AF02FB3 /* Tracker */,
+				F07480D2AB376C643731AADB /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		6D842F868CADFB4CDDE53AFB /* SugarfreeTests */ = {
+			isa = PBXGroup;
+			children = (
+				979FADBA48C07CFBDF5123E1 /* OpenFoodFactsServiceTests.swift */,
+			);
+			path = SugarfreeTests;
+			sourceTree = "<group>";
+		};
+		7C991D26A13DE470F0D0ACAF /* Scanner */ = {
+			isa = PBXGroup;
+			children = (
+				9487124C05C6ABD83C90AA82 /* BarcodeScannerView.swift */,
+			);
+			path = Scanner;
+			sourceTree = "<group>";
+		};
+		9664A7E9BEAADAE07CE501BB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				23796D727FF129BDCE4B305B /* DailyLog.swift */,
+				6714FAE9198A392570D1CAE3 /* FoodEntry.swift */,
+				EEFFC596B90C27A9B01A1516 /* SugarGoal.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B6DF8CD7097E73D89D151245 = {
+			isa = PBXGroup;
+			children = (
+				31780DF0626532B29EE8FA7B /* Sugarfree */,
+				6D842F868CADFB4CDDE53AFB /* SugarfreeTests */,
+				44B9AC15DB06539A23F542B0 /* SugarfreeUITests */,
+				43C3BA6AA6A3D8FA26735D31 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D9D3A0EEF28A43909AF02FB3 /* Tracker */ = {
+			isa = PBXGroup;
+			children = (
+				839A81F6343F3FA00C7C7F7D /* TrackerView.swift */,
+			);
+			path = Tracker;
+			sourceTree = "<group>";
+		};
+		E25BF6713DC84B3CFBE0B499 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				08A100FE30499384E26CF6AE /* Assets.xcassets */,
+				D8118ACCF665819ABED78103 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		E8A93A892B6A156B507E3D0B /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				DA7F9601FB138C5243B465D2 /* NutritionModels.swift */,
+				F482642F203EB361479B766B /* OpenFoodFactsService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		EBFA710CC1F1101D1892D2E2 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				163589D05C22FE346DED8E40 /* SugarfreeApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		EDBE2906C02F66F17490B9B1 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				7EDBD80BE235CBBB5EC12B54 /* Date+Extensions.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		F5B74772F8D91EF3F92AB184 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				3F055A8B092AFAB0C8ABE5CB /* DashboardViewModel.swift */,
+				56BD831BF14BEBD22D3843D0 /* GoalsViewModel.swift */,
+				B66A492C1DA1C0FE7D3C9FDA /* ScannerViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		098771A4F5B8BC7E2A60A5A2 /* SugarfreeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 703FF3BF66425B4FF3513DFA /* Build configuration list for PBXNativeTarget "SugarfreeTests" */;
+			buildPhases = (
+				F1B9CC6D5B76E77CE594F52E /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8BC3FA55C19A586B4F934871 /* PBXTargetDependency */,
+			);
+			name = SugarfreeTests;
+			packageProductDependencies = (
+			);
+			productName = SugarfreeTests;
+			productReference = 31A32B4DA0CEEC75380FCF6D /* SugarfreeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		6DDB155A10877F12B42F184F /* Sugarfree */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3ED0EABE17AE7410EA2CF10D /* Build configuration list for PBXNativeTarget "Sugarfree" */;
+			buildPhases = (
+				B0FC8ABE82906E420A1D767B /* SwiftLint */,
+				85C8E7E481C5ACF829306A95 /* Sources */,
+				C08E8F48108676373B018C3A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Sugarfree;
+			packageProductDependencies = (
+			);
+			productName = Sugarfree;
+			productReference = B567B04475BDB071F6BC6012 /* Sugarfree.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B5E86FE7AEEDD2814D0424A8 /* SugarfreeUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7FC3BC18FFCE9E86155A4690 /* Build configuration list for PBXNativeTarget "SugarfreeUITests" */;
+			buildPhases = (
+				C3EE6EA4B1AD4F5B75EE837D /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7E7195C00748251BF1DD4CFD /* PBXTargetDependency */,
+			);
+			name = SugarfreeUITests;
+			packageProductDependencies = (
+			);
+			productName = SugarfreeUITests;
+			productReference = FDDD3BB07C7BED5C67271714 /* SugarfreeUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		986537778880F2CC866F6973 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					6DDB155A10877F12B42F184F = {
+						ProvisioningStyle = Automatic;
+					};
+					B5E86FE7AEEDD2814D0424A8 = {
+						TestTargetID = 6DDB155A10877F12B42F184F;
+					};
+				};
+			};
+			buildConfigurationList = FD24CE0C78A157C1A238C211 /* Build configuration list for PBXProject "Sugarfree" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = B6DF8CD7097E73D89D151245;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 43C3BA6AA6A3D8FA26735D31 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6DDB155A10877F12B42F184F /* Sugarfree */,
+				098771A4F5B8BC7E2A60A5A2 /* SugarfreeTests */,
+				B5E86FE7AEEDD2814D0424A8 /* SugarfreeUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C08E8F48108676373B018C3A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B25A684009A709EB7D0349B4 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B0FC8ABE82906E420A1D767B /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if command -v swiftlint >/dev/null 2>&1; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		85C8E7E481C5ACF829306A95 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE0862C089C61A44078C0B79 /* BarcodeScannerView.swift in Sources */,
+				7341FC909CC6F6EF6D1ABDE6 /* ContentView.swift in Sources */,
+				37B378801E75CB59386B28AF /* DailyLog.swift in Sources */,
+				DD390856706D87AD53837447 /* DashboardView.swift in Sources */,
+				DB8E8D39EE08F410459BE94E /* DashboardViewModel.swift in Sources */,
+				F58B7684DED1BBE6B9EC5B0A /* Date+Extensions.swift in Sources */,
+				0EAB8780A23A06668E6CC50C /* FoodEntry.swift in Sources */,
+				0DF7A386E998257C5C6E7683 /* GoalsView.swift in Sources */,
+				C74F6972B8797080CF970E71 /* GoalsViewModel.swift in Sources */,
+				E9D559D3AC0EE271B70BCE8A /* NutritionModels.swift in Sources */,
+				47356EDB38D313C9A44E18E0 /* OpenFoodFactsService.swift in Sources */,
+				34B6FF61C44D8C80BE9B8420 /* ScannerViewModel.swift in Sources */,
+				AA53DD0BC1B8CF9C3FE8927F /* SugarGoal.swift in Sources */,
+				690C1A254C14EEC1B33AF24C /* SugarfreeApp.swift in Sources */,
+				815623AB331C1CC3FB03FAB7 /* TrackerView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C3EE6EA4B1AD4F5B75EE837D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1A390D4DBDA36F83506A561C /* SugarfreeUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1B9CC6D5B76E77CE594F52E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52A343482765241F36BD553F /* OpenFoodFactsServiceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7E7195C00748251BF1DD4CFD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6DDB155A10877F12B42F184F /* Sugarfree */;
+			targetProxy = 5A8A76624689AB130D3CE3CA /* PBXContainerItemProxy */;
+		};
+		8BC3FA55C19A586B4F934871 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6DDB155A10877F12B42F184F /* Sugarfree */;
+			targetProxy = 854C31007F46373F83BB1156 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0F82789F129905FD993BB45D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		2031C8A02700367476573731 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sugarfree.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sugarfree.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Sugarfree";
+			};
+			name = Debug;
+		};
+		4B0E86A2CEFA11E17676383B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sugarfree.uitests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Sugarfree;
+			};
+			name = Debug;
+		};
+		6C9B24719707520A95591002 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		7C2FF1E4276C164E356BC143 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Sugarfree/Sugarfree.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = Sugarfree/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sugarfree.app;
+				PRODUCT_NAME = Sugarfree;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B7AC778FB61E6525708142A5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sugarfree.uitests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Sugarfree;
+			};
+			name = Release;
+		};
+		B7E8649BA23DEC1AE3A0311E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Sugarfree/Sugarfree.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = Sugarfree/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sugarfree.app;
+				PRODUCT_NAME = Sugarfree;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BFB48A9073EF29F3BF820F18 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sugarfree.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sugarfree.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Sugarfree";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3ED0EABE17AE7410EA2CF10D /* Build configuration list for PBXNativeTarget "Sugarfree" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B7E8649BA23DEC1AE3A0311E /* Debug */,
+				7C2FF1E4276C164E356BC143 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		703FF3BF66425B4FF3513DFA /* Build configuration list for PBXNativeTarget "SugarfreeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2031C8A02700367476573731 /* Debug */,
+				BFB48A9073EF29F3BF820F18 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		7FC3BC18FFCE9E86155A4690 /* Build configuration list for PBXNativeTarget "SugarfreeUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4B0E86A2CEFA11E17676383B /* Debug */,
+				B7AC778FB61E6525708142A5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		FD24CE0C78A157C1A238C211 /* Build configuration list for PBXProject "Sugarfree" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6C9B24719707520A95591002 /* Debug */,
+				0F82789F129905FD993BB45D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 986537778880F2CC866F6973 /* Project object */;
+}

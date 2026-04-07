@@ -1,36 +1,50 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Xcode
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+DerivedData/
+*.moved-aside
+*.ips
+*.xcuserstate
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
+# Build products
+build/
+*.o
+*.a
+*.dylib
 
-# testing
-/coverage
+# Swift Package Manager
+.build/
+.swiftpm/
+Packages/
+Package.pins
+Package.resolved
 
-# next.js
-/.next/
-/out/
+# CocoaPods (not used, but just in case)
+Pods/
 
-# production
-/build
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
 
-# misc
+# Code coverage
+*.gcno
+*.gcda
+*.profraw
+*.profdata
+
+# OS files
 .DS_Store
+*.swp
+*~
+Thumbs.db
+
+# Environment / secrets
+.env
+.env.local
 *.pem
 
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# local env files
-.env*.local
-.env
-
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# Project internal
+context-log.md
