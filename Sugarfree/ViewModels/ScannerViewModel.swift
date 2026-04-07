@@ -1,44 +1,70 @@
 import Foundation
+import SwiftData
 import Observation
+
+enum ScannerState: Equatable {
+    case scanning
+    case loading
+    case found(name: String, brand: String?, sugarGrams: Double?, servingSize: String?)
+    case notFound(barcode: String)
+    case error(String)
+}
 
 @Observable
 final class ScannerViewModel {
-    var scannedBarcode: String?
-    var productName: String?
-    var sugarGrams: Double?
-    var isLoading = false
-    var errorMessage: String?
+    var state: ScannerState = .scanning
     var showManualEntry = false
 
     private let service = OpenFoodFactsService()
 
-    // TODO: Call service.fetchProduct, parse sugar content, handle errors
+    var isScanning: Bool {
+        state == .scanning
+    }
+
     func lookupBarcode(_ barcode: String) async {
-        scannedBarcode = barcode
-        isLoading = true
-        errorMessage = nil
+        state = .loading
 
         do {
             let result = try await service.fetchProduct(barcode: barcode)
-            productName = result.product?.productName
-            sugarGrams = result.product?.nutriments?.bestSugarEstimateGrams
-            if sugarGrams == nil {
-                showManualEntry = true
-            }
-        } catch {
-            errorMessage = error.localizedDescription
-            showManualEntry = true
-        }
 
-        isLoading = false
+            guard let product = result.product, result.status == 1 else {
+                state = .notFound(barcode: barcode)
+                return
+            }
+
+            state = .found(
+                name: product.productName ?? "Unknown Product",
+                brand: product.brands,
+                sugarGrams: product.nutriments?.bestSugarEstimateGrams,
+                servingSize: product.servingSize
+            )
+        } catch {
+            state = .error(error.localizedDescription)
+        }
+    }
+
+    func saveEntry(
+        name: String,
+        brand: String?,
+        barcode: String?,
+        sugarGrams: Double,
+        servingSize: String?,
+        context: ModelContext
+    ) {
+        let entry = FoodEntry(
+            name: name,
+            brand: brand,
+            barcode: barcode,
+            sugarGrams: sugarGrams,
+            servingSize: servingSize,
+            isManualEntry: false
+        )
+        context.insert(entry)
+        reset()
     }
 
     func reset() {
-        scannedBarcode = nil
-        productName = nil
-        sugarGrams = nil
-        isLoading = false
-        errorMessage = nil
+        state = .scanning
         showManualEntry = false
     }
 }
