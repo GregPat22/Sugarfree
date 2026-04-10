@@ -5,11 +5,17 @@ struct ProductResultCard: View {
     let brand: String?
     let sugarGrams: Double?
     let servingSize: String?
+    let suggestions: [SwapSuggestion]
+    let remainingBudgetText: String?
+    let riskText: String?
     let onSave: (Double) -> Void
+    let onUseSwap: (String, Double) -> Void
     let onManualEntry: () -> Void
     let onRescan: () -> Void
+    var onSuggestionsShown: (() -> Void)? = nil
 
     @State private var servings: Double = 1.0
+    @State private var didReportSuggestions = false
 
     private var hasSugarData: Bool { sugarGrams != nil }
 
@@ -38,6 +44,18 @@ struct ProductResultCard: View {
                 noSugarDataView
             }
 
+            if let remainingBudgetText {
+                Text(remainingBudgetText)
+                    .font(.subheadline.weight(.medium))
+                    .foregroundStyle(.secondary)
+            }
+
+            if let riskText {
+                Text(riskText)
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(riskText.contains("High") ? .red : .orange)
+            }
+
             if sugarGrams != nil {
                 servingsControl
             }
@@ -46,6 +64,10 @@ struct ProductResultCard: View {
                 Text("Serving: \(servingSize)")
                     .font(.caption)
                     .foregroundStyle(.secondary)
+            }
+
+            if !suggestions.isEmpty {
+                smartSwapSection
             }
 
             HStack(spacing: 12) {
@@ -64,6 +86,11 @@ struct ProductResultCard: View {
         .padding(24)
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 20))
         .padding()
+        .onAppear {
+            guard !suggestions.isEmpty, !didReportSuggestions else { return }
+            didReportSuggestions = true
+            onSuggestionsShown?()
+        }
     }
 
     // MARK: - Servings Control
@@ -154,6 +181,36 @@ struct ProductResultCard: View {
             Text("Sugar data not available")
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
+        }
+    }
+
+    private var smartSwapSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Label("Better Options", systemImage: "sparkles")
+                .font(.headline)
+
+            ForEach(Array(suggestions.enumerated()), id: \.offset) { _, suggestion in
+                Button {
+                    onUseSwap(suggestion.title, suggestion.estimatedSugarGrams)
+                } label: {
+                    HStack {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(suggestion.title)
+                                .font(.subheadline.weight(.semibold))
+                            Text(suggestion.detail)
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                        Spacer()
+                        Text("\(suggestion.estimatedSugarGrams, specifier: "%.1f")g")
+                            .font(.caption.monospacedDigit())
+                            .foregroundStyle(.green)
+                    }
+                    .padding(10)
+                    .background(Color.secondary.opacity(0.12), in: RoundedRectangle(cornerRadius: 12))
+                }
+                .buttonStyle(.plain)
+            }
         }
     }
 }

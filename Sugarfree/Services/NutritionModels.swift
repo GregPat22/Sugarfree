@@ -10,12 +10,14 @@ struct Product: Decodable {
     let brands: String?
     let servingSize: String?
     let nutriments: Nutriments?
+    let categoriesTags: [String]?
 
     enum CodingKeys: String, CodingKey {
         case productName = "product_name"
         case brands
         case servingSize = "serving_size"
         case nutriments
+        case categoriesTags = "categories_tags"
     }
 }
 

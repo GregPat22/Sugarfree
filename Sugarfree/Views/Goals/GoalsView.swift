@@ -5,6 +5,7 @@ struct GoalsView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var viewModel = GoalsViewModel()
     @State private var showResetConfirmation = false
+    @State private var insuranceFeedback: String?
 
     private let limitRange: ClosedRange<Double> = 0...100
     private let limitStep: Double = 5
@@ -73,6 +74,29 @@ struct GoalsView: View {
                     }
                 }
 
+                Section("Streak Insurance") {
+                    LabeledContent("Available Saves") {
+                        Text("\(viewModel.insuranceCredits)")
+                            .font(.headline.monospacedDigit())
+                    }
+
+                    Text("Earn 1 save every 10 streak days. Use a save when you go over once.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+
+                    Button("Refresh Earned Saves") {
+                        viewModel.claimInsuranceProgress(context: modelContext)
+                    }
+
+                    Button("Use One Save") {
+                        let used = viewModel.useInsurance(context: modelContext)
+                        insuranceFeedback = used
+                            ? "Save applied. Your streak is protected for one slip day."
+                            : "No saves available yet. Keep streaking to earn one."
+                    }
+                    .disabled(viewModel.insuranceCredits <= 0)
+                }
+
                 Section {
                     Button("Reset Streak & Start Over", role: .destructive) {
                         showResetConfirmation = true
@@ -82,6 +106,17 @@ struct GoalsView: View {
             .navigationTitle("Goals")
             .onAppear {
                 viewModel.loadGoal(context: modelContext)
+            }
+            .alert(
+                "Streak Insurance",
+                isPresented: Binding(
+                    get: { insuranceFeedback != nil },
+                    set: { if !$0 { insuranceFeedback = nil } }
+                )
+            ) {
+                Button("OK", role: .cancel) { insuranceFeedback = nil }
+            } message: {
+                Text(insuranceFeedback ?? "")
             }
             .confirmationDialog(
                 "Reset your streak?",
@@ -110,5 +145,5 @@ struct GoalsView: View {
 
 #Preview {
     GoalsView()
-        .modelContainer(for: [SugarGoal.self, FoodEntry.self], inMemory: true)
+        .modelContainer(for: [SugarGoal.self, FoodEntry.self, FeatureEvent.self], inMemory: true)
 }

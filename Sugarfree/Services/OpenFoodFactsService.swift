@@ -8,7 +8,7 @@ struct OpenFoodFactsService: Sendable {
             .appendingPathComponent("product")
             .appendingPathComponent(barcode)
             .appending(queryItems: [
-                URLQueryItem(name: "fields", value: "product_name,brands,nutriments,serving_size")
+                URLQueryItem(name: "fields", value: "product_name,brands,nutriments,serving_size,categories_tags")
             ])
 
         var request = URLRequest(url: url)

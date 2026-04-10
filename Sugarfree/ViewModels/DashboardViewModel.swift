@@ -10,6 +10,12 @@ final class DashboardViewModel {
     var currentStreak: Int = 0
     var longestStreak: Int = 0
     var recentEntries: [FoodEntry] = []
+    var scanToLogConversion: Double = 0
+    var swapAdoptionRate: Double = 0
+    var weeklyRetentionProxy: Int = 0
+    var streakRecoveryRate: Double = 0
+    var avgDailySugar7d: Double = 0
+    private var hasLoggedToday = false
 
     var remainingGrams: Double {
         max(0, dailyLimitGrams - todaySugarGrams)
@@ -24,10 +30,20 @@ final class DashboardViewModel {
         todaySugarGrams > dailyLimitGrams
     }
 
+    var predictiveBudgetMessage: String {
+        let projectedRemaining = remainingGrams - 6 // default snack simulation
+        if projectedRemaining >= 0 {
+            return "If your next snack is ~6g sugar, you'll still have \(projectedRemaining, specifier: "%.1f")g left."
+        }
+        return "A ~6g snack now would push today over by \(-projectedRemaining, specifier: "%.1f")g."
+    }
+
     func loadTodayData(context: ModelContext) {
         loadTodayEntries(context: context)
         loadGoal(context: context)
         calculateStreak(context: context)
+        refreshDailyLog(context: context)
+        loadMetrics(context: context)
     }
 
     private func loadTodayEntries(context: ModelContext) {
@@ -47,9 +63,11 @@ final class DashboardViewModel {
             let entries = try context.fetch(descriptor)
             recentEntries = entries
             todaySugarGrams = entries.reduce(0) { $0 + $1.sugarGrams }
+            hasLoggedToday = !entries.isEmpty
         } catch {
             recentEntries = []
             todaySugarGrams = 0
+            hasLoggedToday = false
         }
     }
 
@@ -89,8 +107,9 @@ final class DashboardViewModel {
             checkDate = calendar.date(byAdding: .day, value: -1, to: checkDate)!
         }
 
+        // Streak policy: today counts only if user has logged at least one entry and stayed under limit.
         let todayUnder = todaySugarGrams <= goal.dailyLimitGrams
-        if todayUnder && todaySugarGrams > 0 {
+        if todayUnder && hasLoggedToday {
             streak += 1
         }
 
@@ -100,5 +119,53 @@ final class DashboardViewModel {
             goal.longestStreakDays = streak
             longestStreak = streak
         }
+    }
+
+    private func refreshDailyLog(context: ModelContext) {
+        let dayStart = Calendar.current.startOfDay(for: .now)
+        let nextDay = Calendar.current.date(byAdding: .day, value: 1, to: dayStart) ?? .now
+
+        let predicate = #Predicate<DailyLog> { log in
+            log.date >= dayStart && log.date < nextDay
+        }
+        let descriptor = FetchDescriptor(predicate: predicate)
+        let dayLog = (try? context.fetch(descriptor).first) ?? DailyLog(date: dayStart)
+
+        dayLog.totalSugarGrams = todaySugarGrams
+        dayLog.entryCount = recentEntries.count
+        dayLog.metGoal = !isOverLimit
+        dayLog.forecastRemainingGrams = remainingGrams - 6
+        dayLog.riskLevel = isOverLimit ? "high" : (remainingGrams < 5 ? "medium" : "low")
+
+        if dayLog.modelContext == nil {
+            context.insert(dayLog)
+        }
+    }
+
+    private func loadMetrics(context: ModelContext) {
+        let sevenDaysAgo = Calendar.current.date(byAdding: .day, value: -7, to: .now) ?? .now
+        let eventPredicate = #Predicate<FeatureEvent> { event in
+            event.timestamp >= sevenDaysAgo
+        }
+        let events = (try? context.fetch(FetchDescriptor(predicate: eventPredicate))) ?? []
+
+        let scans = Double(events.filter { $0.name == EventName.scanFound.rawValue }.count)
+        let logs = Double(events.filter { $0.name == EventName.entrySaved.rawValue }.count)
+        let swapsShown = Double(events.filter { $0.name == EventName.swapShown.rawValue }.count)
+        let swapsTapped = Double(events.filter { $0.name == EventName.swapTapped.rawValue }.count)
+        let rescues = Double(events.filter { $0.name == EventName.rescueStarted.rawValue }.count)
+        let recoveries = Double(events.filter { $0.name == EventName.insuranceUsed.rawValue }.count)
+
+        scanToLogConversion = scans > 0 ? logs / scans : 0
+        swapAdoptionRate = swapsShown > 0 ? swapsTapped / swapsShown : 0
+        weeklyRetentionProxy = Set(events.map { Calendar.current.startOfDay(for: $0.timestamp) }).count
+        streakRecoveryRate = rescues > 0 ? recoveries / rescues : 0
+
+        let logPredicate = #Predicate<DailyLog> { log in
+            log.date >= sevenDaysAgo
+        }
+        let recentLogs = (try? context.fetch(FetchDescriptor(predicate: logPredicate))) ?? []
+        let total = recentLogs.reduce(0.0) { $0 + $1.totalSugarGrams }
+        avgDailySugar7d = recentLogs.isEmpty ? 0 : total / Double(recentLogs.count)
     }
 }

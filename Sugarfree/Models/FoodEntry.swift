@@ -11,6 +11,9 @@ final class FoodEntry {
     var isManualEntry: Bool
     var timestamp: Date
     var notes: String?
+    var swapRecommendationUsed: Bool
+    var predictedRemainingAfterEntry: Double?
+    var riskAtLogTime: String?
 
     init(
         name: String,
@@ -20,7 +23,10 @@ final class FoodEntry {
         servingSize: String? = nil,
         isManualEntry: Bool = false,
         timestamp: Date = .now,
-        notes: String? = nil
+        notes: String? = nil,
+        swapRecommendationUsed: Bool = false,
+        predictedRemainingAfterEntry: Double? = nil,
+        riskAtLogTime: String? = nil
     ) {
         self.name = name
         self.brand = brand
@@ -30,5 +36,8 @@ final class FoodEntry {
         self.isManualEntry = isManualEntry
         self.timestamp = timestamp
         self.notes = notes
+        self.swapRecommendationUsed = swapRecommendationUsed
+        self.predictedRemainingAfterEntry = predictedRemainingAfterEntry
+        self.riskAtLogTime = riskAtLogTime
     }
 }

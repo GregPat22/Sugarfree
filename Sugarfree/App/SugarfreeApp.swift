@@ -10,7 +10,8 @@ struct SugarfreeApp: App {
         .modelContainer(for: [
             FoodEntry.self,
             DailyLog.self,
-            SugarGoal.self
+            SugarGoal.self,
+            FeatureEvent.self
         ])
     }
 }

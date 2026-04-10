@@ -11,6 +11,7 @@ final class GoalsViewModel {
     var hasActiveGoal = false
     var startDate: Date = .now
     var daysOnPlan: Int = 0
+    var insuranceCredits: Int = 0
 
     func loadGoal(context: ModelContext) {
         let predicate = #Predicate<SugarGoal> { $0.isActive }
@@ -20,6 +21,7 @@ final class GoalsViewModel {
             dailyLimit = goal.dailyLimitGrams
             currentStreak = goal.currentStreakDays
             longestStreak = goal.longestStreakDays
+            insuranceCredits = goal.streakInsuranceCredits
             startDate = goal.startDate
             hasActiveGoal = true
 
@@ -39,6 +41,33 @@ final class GoalsViewModel {
         if let goal = try? context.fetch(descriptor).first {
             goal.dailyLimitGrams = newLimit
         }
+    }
+
+    func claimInsuranceProgress(context: ModelContext) {
+        let predicate = #Predicate<SugarGoal> { $0.isActive }
+        let descriptor = FetchDescriptor(predicate: predicate)
+        guard let goal = try? context.fetch(descriptor).first else { return }
+
+        let target = max(1, goal.currentStreakDays / 10)
+        if goal.streakInsuranceCredits < target {
+            goal.streakInsuranceCredits = target
+            insuranceCredits = target
+        }
+    }
+
+    func useInsurance(context: ModelContext) -> Bool {
+        let predicate = #Predicate<SugarGoal> { $0.isActive }
+        let descriptor = FetchDescriptor(predicate: predicate)
+        guard let goal = try? context.fetch(descriptor).first,
+              goal.streakInsuranceCredits > 0 else {
+            return false
+        }
+
+        goal.streakInsuranceCredits -= 1
+        goal.streakInsuranceUses += 1
+        insuranceCredits = goal.streakInsuranceCredits
+        EventLogger.log(.insuranceUsed, metadata: "manual_use", context: context)
+        return true
     }
 
     func resetStreak(context: ModelContext) {
@@ -61,5 +90,6 @@ final class GoalsViewModel {
         hasActiveGoal = true
         startDate = goal.startDate
         daysOnPlan = 0
+        insuranceCredits = 0
     }
 }

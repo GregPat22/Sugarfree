@@ -14,6 +14,8 @@ struct ManualEntryForm: View {
     @State private var sugarGrams: String = ""
     @State private var servingSize: String = ""
     @State private var notes: String = ""
+    @State private var currentDayTotal: Double = 0
+    @State private var currentDailyLimit: Double = 25
 
     @FocusState private var focusedField: Field?
 
@@ -23,6 +25,15 @@ struct ManualEntryForm: View {
         !name.trimmingCharacters(in: .whitespaces).isEmpty
         && Double(sugarGrams) != nil
         && (Double(sugarGrams) ?? -1) >= 0
+    }
+
+    private var predictedRemainingText: String? {
+        guard let sugar = Double(sugarGrams), sugar >= 0 else { return nil }
+        let remaining = currentDailyLimit - (currentDayTotal + sugar)
+        if remaining >= 0 {
+            return "After save: \(remaining, specifier: "%.1f")g left today"
+        }
+        return "After save: \(-remaining, specifier: "%.1f")g over limit"
     }
 
     var body: some View {
@@ -45,6 +56,12 @@ struct ManualEntryForm: View {
                     }
                     TextField("Serving size (optional)", text: $servingSize)
                         .focused($focusedField, equals: .serving)
+
+                    if let predictedRemainingText {
+                        Text(predictedRemainingText)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
                 }
 
                 Section("Notes") {
@@ -70,6 +87,7 @@ struct ManualEntryForm: View {
                 brand = prefillBrand ?? ""
                 if name.isEmpty { focusedField = .name }
                 else { focusedField = .sugar }
+                loadDayBudget()
             }
         }
     }
@@ -84,14 +102,33 @@ struct ManualEntryForm: View {
             sugarGrams: sugar,
             servingSize: servingSize.isEmpty ? nil : servingSize,
             isManualEntry: true,
-            notes: notes.isEmpty ? nil : notes
+            notes: notes.isEmpty ? nil : notes,
+            predictedRemainingAfterEntry: currentDailyLimit - (currentDayTotal + sugar),
+            riskAtLogTime: currentDailyLimit - (currentDayTotal + sugar) < 0 ? "high" : "low"
         )
         modelContext.insert(entry)
+        EventLogger.log(.entrySaved, metadata: "manual", context: modelContext)
         dismiss()
+    }
+
+    private func loadDayBudget() {
+        let startOfDay = Calendar.current.startOfDay(for: .now)
+        let endOfDay = Calendar.current.date(byAdding: .day, value: 1, to: startOfDay) ?? .now
+
+        let entryPredicate = #Predicate<FoodEntry> { entry in
+            entry.timestamp >= startOfDay && entry.timestamp < endOfDay
+        }
+        let entries = (try? modelContext.fetch(FetchDescriptor(predicate: entryPredicate))) ?? []
+        currentDayTotal = entries.reduce(0) { $0 + $1.sugarGrams }
+
+        let goalPredicate = #Predicate<SugarGoal> { $0.isActive }
+        if let goal = try? modelContext.fetch(FetchDescriptor(predicate: goalPredicate)).first {
+            currentDailyLimit = goal.dailyLimitGrams
+        }
     }
 }
 
 #Preview {
     ManualEntryForm()
-        .modelContainer(for: FoodEntry.self, inMemory: true)
+        .modelContainer(for: [FoodEntry.self, SugarGoal.self], inMemory: true)
 }

@@ -29,19 +29,49 @@ struct BarcodeScannerView: View {
                         ProgressView("Looking up product...")
                             .padding()
                             .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
-                    case .found(let name, let brand, let sugar, let serving):
+                    case .found(let name, let brand, let barcode, let sugar, let serving, let categoryTags):
                         ProductResultCard(
                             name: name,
                             brand: brand,
                             sugarGrams: sugar,
                             servingSize: serving,
+                            suggestions: viewModel.suggestions(
+                                productName: name,
+                                categoryTags: categoryTags,
+                                sugarGrams: sugar
+                            ),
+                            remainingBudgetText: {
+                                guard let sugar else { return nil }
+                                let remaining = viewModel.predictedRemaining(after: sugar)
+                                return remaining >= 0
+                                    ? "After this entry: \(remaining, specifier: "%.1f")g left today"
+                                    : "After this entry: \(-remaining, specifier: "%.1f")g over today"
+                            }(),
+                            riskText: {
+                                guard let sugar else { return nil }
+                                return viewModel.streakRiskText(for: sugar)
+                            }(),
                             onSave: { grams in
                                 viewModel.saveEntry(
                                     name: name,
                                     brand: brand,
-                                    barcode: nil,
+                                    barcode: barcode,
                                     sugarGrams: grams,
                                     servingSize: serving,
+                                    swapUsed: false,
+                                    context: modelContext
+                                )
+                                coordinator.start()
+                            },
+                            onUseSwap: { suggestion, estimatedSugar in
+                                EventLogger.log(.swapTapped, metadata: suggestion, context: modelContext)
+                                viewModel.saveEntry(
+                                    name: suggestion,
+                                    brand: brand,
+                                    barcode: barcode,
+                                    sugarGrams: estimatedSugar,
+                                    servingSize: serving,
+                                    swapUsed: true,
                                     context: modelContext
                                 )
                                 coordinator.start()
@@ -50,6 +80,9 @@ struct BarcodeScannerView: View {
                             onRescan: {
                                 viewModel.reset()
                                 coordinator.start()
+                            },
+                            onSuggestionsShown: {
+                                EventLogger.log(.swapShown, metadata: name, context: modelContext)
                             }
                         )
                     case .notFound(let barcode):
@@ -69,9 +102,25 @@ struct BarcodeScannerView: View {
                         Image(systemName: "keyboard")
                     }
                 }
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("Rescue") {
+                        viewModel.startRescueMode(context: modelContext)
+                    }
+                }
             }
             .sheet(isPresented: $viewModel.showManualEntry) {
                 manualEntrySheet
+            }
+            .alert(
+                "Craving Rescue",
+                isPresented: Binding(
+                    get: { viewModel.rescueModeMessage != nil },
+                    set: { if !$0 { viewModel.rescueModeMessage = nil } }
+                )
+            ) {
+                Button("Got it", role: .cancel) { viewModel.rescueModeMessage = nil }
+            } message: {
+                Text(viewModel.rescueModeMessage ?? "")
             }
             .task {
                 await requestCameraAccess()
@@ -87,7 +136,7 @@ struct BarcodeScannerView: View {
 
     private func setupCoordinator() {
         coordinator.onBarcodeDetected = { @MainActor barcode in
-            Task { await viewModel.lookupBarcode(barcode) }
+            Task { await viewModel.lookupBarcode(barcode, context: modelContext) }
         }
         coordinator.configureAndStart()
     }
@@ -186,7 +235,7 @@ struct BarcodeScannerView: View {
     @ViewBuilder
     private var manualEntrySheet: some View {
         switch viewModel.state {
-        case .found(let name, let brand, _, _):
+        case .found(let name, let brand, _, _, _, _):
             ManualEntryForm(prefillName: name, prefillBrand: brand)
         case .notFound(let barcode):
             ManualEntryForm(prefillBarcode: barcode)
@@ -210,5 +259,5 @@ struct BarcodeScannerView: View {
 
 #Preview {
     BarcodeScannerView()
-        .modelContainer(for: FoodEntry.self, inMemory: true)
+        .modelContainer(for: [FoodEntry.self, SugarGoal.self, FeatureEvent.self], inMemory: true)
 }

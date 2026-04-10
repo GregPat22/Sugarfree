@@ -1,6 +1,13 @@
 # Sugarfree
 
-A native iOS app that helps you break free from added sugar. Scan barcodes to instantly check sugar content, track your daily intake, and build sugar-free streaks with personalized goals. Built with SwiftUI and SwiftData, with iCloud sync across your Apple devices.
+A native iOS app that helps you break free from added sugar. Scan barcodes to instantly check sugar content, track your daily intake, and build sugar-free streaks with personalized goals. Built with SwiftUI and SwiftData for local-first on-device tracking.
+
+## Innovation Highlights
+
+- **Smart Swap Loop:** High-sugar scans now show lower-sugar alternatives with one-tap logging.
+- **Predictive Budgeting:** Scanner and manual logging estimate post-entry daily remaining sugar and streak risk.
+- **Streak Insurance:** Users earn and spend streak saves to recover from occasional slip days.
+- **Behavior Telemetry:** Local event metrics track scan-to-log conversion, swap adoption, and recovery.
 
 ## Tech Stack
 
@@ -10,7 +17,7 @@ A native iOS app that helps you break free from added sugar. Scan barcodes to in
 | UI | SwiftUI | Declarative, modern iOS development |
 | Architecture | MVVM | Natural fit for SwiftUI data binding |
 | Persistence | SwiftData | Apple's modern ORM, minimal boilerplate |
-| Cloud Sync | CloudKit via SwiftData | Free iCloud sync, zero backend |
+| Data Sync | Local-only (current) | Works without paid Apple Developer account |
 | Barcode Scanning | AVFoundation | Native camera barcode detection |
 | Nutrition Data | OpenFoodFacts API | Free open-source food database |
 | Networking | URLSession + async/await | Native Swift concurrency |
@@ -32,9 +39,9 @@ User → View (SwiftUI) → ViewModel (@Observable) → SwiftData (ModelContext)
 
 **Barcode flow:** User points camera at a product → AVFoundation detects the barcode → `ScannerViewModel` calls `OpenFoodFactsService` with the barcode → API returns sugar content → user confirms → `FoodEntry` is saved to SwiftData.
 
-**Tracking flow:** `FoodEntry` records accumulate throughout the day → `DashboardViewModel` queries today's entries and computes total sugar intake → displayed against the user's `SugarGoal` daily limit → `DailyLog` is updated at end of day for streak calculation.
+**Tracking flow:** `FoodEntry` records accumulate throughout the day → `DashboardViewModel` queries today's entries and computes total sugar intake → displayed against the user's `SugarGoal` daily limit → streak is recalculated from saved entries.
 
-SwiftData handles iCloud sync automatically via CloudKit -- any data saved on one device appears on the user's other Apple devices.
+Data is stored locally on-device using SwiftData. Cloud sync can be added later if you enable CloudKit capabilities and paid provisioning.
 
 ## Project Structure
 
@@ -45,7 +52,7 @@ Sugarfree/
 ├── .github/workflows/ci.yml ← CI pipeline
 ├── Sugarfree/
 │   ├── App/                 ← App entry point, SwiftData container setup
-│   ├── Models/              ← SwiftData @Model types (FoodEntry, DailyLog, SugarGoal)
+│   ├── Models/              ← SwiftData @Model types (FoodEntry, DailyLog, SugarGoal, FeatureEvent)
 │   ├── Views/               ← SwiftUI views organized by feature
 │   │   ├── ContentView.swift    (tab bar root)
 │   │   ├── Dashboard/           (daily overview, sugar gauge, streaks)
@@ -53,7 +60,7 @@ Sugarfree/
 │   │   ├── Tracker/             (food entry log, manual entry)
 │   │   └── Goals/               (daily limit, streak stats)
 │   ├── ViewModels/          ← @Observable view models per feature
-│   ├── Services/            ← API clients (OpenFoodFacts) and response types
+│   ├── Services/            ← API clients, Smart Swap engine, telemetry helpers
 │   ├── Utilities/           ← Extensions and helpers
 │   └── Resources/           ← Assets.xcassets, Info.plist
 ├── SugarfreeTests/          ← Unit tests (Swift Testing)
@@ -139,7 +146,7 @@ xcodebuild test \
 
 1. Set your Apple Developer Team in Xcode → Sugarfree target → Signing & Capabilities
 2. Update the bundle identifier from `com.sugarfree.app` to your own
-3. Enable the iCloud capability and select your CloudKit container
+3. (Optional) Enable iCloud + CloudKit only if you are using a paid Apple Developer team
 4. Archive via Product → Archive in Xcode
 5. Upload to App Store Connect via the Organizer
 
