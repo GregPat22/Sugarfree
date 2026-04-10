@@ -17,7 +17,10 @@ struct CameraPreview: UIViewRepresentable {
         override class var layerClass: AnyClass { AVCaptureVideoPreviewLayer.self }
 
         var previewLayer: AVCaptureVideoPreviewLayer {
-            layer as! AVCaptureVideoPreviewLayer
+            guard let previewLayer = layer as? AVCaptureVideoPreviewLayer else {
+                return AVCaptureVideoPreviewLayer()
+            }
+            return previewLayer
         }
     }
 }

@@ -66,7 +66,7 @@ final class GoalsViewModel {
         goal.streakInsuranceCredits -= 1
         goal.streakInsuranceUses += 1
         insuranceCredits = goal.streakInsuranceCredits
-        EventLogger.log(.insuranceUsed, metadata: "manual_use", context: context)
+        context.insert(FeatureEvent(name: "insurance_used", metadata: "manual_use"))
         return true
     }
 

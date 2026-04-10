@@ -114,11 +114,11 @@ struct DashboardView: View {
             Label("Innovation Metrics (7d)", systemImage: "chart.xyaxis.line")
                 .font(.headline)
 
-            metricRow("Scan -> Log Conversion", value: "\(viewModel.scanToLogConversion * 100, specifier: "%.0f")%")
-            metricRow("Swap Adoption", value: "\(viewModel.swapAdoptionRate * 100, specifier: "%.0f")%")
+            metricRow("Scan -> Log Conversion", value: String(format: "%.0f%%", viewModel.scanToLogConversion * 100))
+            metricRow("Swap Adoption", value: String(format: "%.0f%%", viewModel.swapAdoptionRate * 100))
             metricRow("Retention Proxy (active days)", value: "\(viewModel.weeklyRetentionProxy)")
-            metricRow("Streak Recovery", value: "\(viewModel.streakRecoveryRate * 100, specifier: "%.0f")%")
-            metricRow("Avg Daily Sugar", value: "\(viewModel.avgDailySugar7d, specifier: "%.1f")g")
+            metricRow("Streak Recovery", value: String(format: "%.0f%%", viewModel.streakRecoveryRate * 100))
+            metricRow("Avg Daily Sugar", value: String(format: "%.1fg", viewModel.avgDailySugar7d))
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()

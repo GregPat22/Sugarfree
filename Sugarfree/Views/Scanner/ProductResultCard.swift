@@ -12,7 +12,7 @@ struct ProductResultCard: View {
     let onUseSwap: (String, Double) -> Void
     let onManualEntry: () -> Void
     let onRescan: () -> Void
-    var onSuggestionsShown: (() -> Void)? = nil
+    var onSuggestionsShown: (() -> Void)?
 
     @State private var servings: Double = 1.0
     @State private var didReportSuggestions = false

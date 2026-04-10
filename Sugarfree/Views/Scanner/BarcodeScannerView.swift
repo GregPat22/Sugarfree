@@ -44,8 +44,8 @@ struct BarcodeScannerView: View {
                                 guard let sugar else { return nil }
                                 let remaining = viewModel.predictedRemaining(after: sugar)
                                 return remaining >= 0
-                                    ? "After this entry: \(remaining, specifier: "%.1f")g left today"
-                                    : "After this entry: \(-remaining, specifier: "%.1f")g over today"
+                                    ? String(format: "After this entry: %.1fg left today", remaining)
+                                    : String(format: "After this entry: %.1fg over today", -remaining)
                             }(),
                             riskText: {
                                 guard let sugar else { return nil }

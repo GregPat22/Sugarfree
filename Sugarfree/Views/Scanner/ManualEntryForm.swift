@@ -31,9 +31,9 @@ struct ManualEntryForm: View {
         guard let sugar = Double(sugarGrams), sugar >= 0 else { return nil }
         let remaining = currentDailyLimit - (currentDayTotal + sugar)
         if remaining >= 0 {
-            return "After save: \(remaining, specifier: "%.1f")g left today"
+            return String(format: "After save: %.1fg left today", remaining)
         }
-        return "After save: \(-remaining, specifier: "%.1f")g over limit"
+        return String(format: "After save: %.1fg over limit", -remaining)
     }
 
     var body: some View {
@@ -85,8 +85,7 @@ struct ManualEntryForm: View {
             .onAppear {
                 name = prefillName ?? ""
                 brand = prefillBrand ?? ""
-                if name.isEmpty { focusedField = .name }
-                else { focusedField = .sugar }
+                if name.isEmpty { focusedField = .name } else { focusedField = .sugar }
                 loadDayBudget()
             }
         }

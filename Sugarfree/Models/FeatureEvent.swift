@@ -1,8 +1,9 @@
 import Foundation
 import SwiftData
 
+// Kept for project file compatibility; the active `FeatureEvent` model is in `DailyLog.swift`.
 @Model
-final class FeatureEvent {
+final class FeatureEventMirror {
     var name: String
     var metadata: String?
     var timestamp: Date
