@@ -21,18 +21,18 @@ struct SmartSwapEngine {
         if categories.contains("breakfast-cereal") || lowerName.contains("cereal") {
             return [
                 SwapSuggestion(
-                    title: "Plain Oats",
-                    detail: "High fiber, add fruit yourself",
+                    title: String(localized: "Plain Oats"),
+                    detail: String(localized: "High fiber, add fruit yourself"),
                     estimatedSugarGrams: 1.0
                 ),
                 SwapSuggestion(
-                    title: "Unsweetened Muesli",
-                    detail: "Crunchy without syrup coating",
+                    title: String(localized: "Unsweetened Muesli"),
+                    detail: String(localized: "Crunchy without syrup coating"),
                     estimatedSugarGrams: 2.5
                 ),
                 SwapSuggestion(
-                    title: "Chia Pudding Base",
-                    detail: "Add cinnamon for sweetness perception",
+                    title: String(localized: "Chia Pudding Base"),
+                    detail: String(localized: "Add cinnamon for sweetness perception"),
                     estimatedSugarGrams: 3.0
                 )
             ]
@@ -41,18 +41,18 @@ struct SmartSwapEngine {
         if categories.contains("yogurt") || lowerName.contains("yogurt") {
             return [
                 SwapSuggestion(
-                    title: "Plain Greek Yogurt",
-                    detail: "Protein-rich base, add berries",
+                    title: String(localized: "Plain Greek Yogurt"),
+                    detail: String(localized: "Protein-rich base, add berries"),
                     estimatedSugarGrams: 4.0
                 ),
                 SwapSuggestion(
-                    title: "Skyr Unsweetened",
-                    detail: "Thicker texture and lower sugar",
+                    title: String(localized: "Skyr Unsweetened"),
+                    detail: String(localized: "Thicker texture and lower sugar"),
                     estimatedSugarGrams: 3.5
                 ),
                 SwapSuggestion(
-                    title: "Natural Kefir",
-                    detail: "Tangy profile, often lower added sugar",
+                    title: String(localized: "Natural Kefir"),
+                    detail: String(localized: "Tangy profile, often lower added sugar"),
                     estimatedSugarGrams: 4.5
                 )
             ]
@@ -61,18 +61,18 @@ struct SmartSwapEngine {
         if categories.contains("soft-drinks") || lowerName.contains("soda") || lowerName.contains("cola") {
             return [
                 SwapSuggestion(
-                    title: "Sparkling Water + Citrus",
-                    detail: "Similar fizz without sugar hit",
+                    title: String(localized: "Sparkling Water + Citrus"),
+                    detail: String(localized: "Similar fizz without sugar hit"),
                     estimatedSugarGrams: 0.0
                 ),
                 SwapSuggestion(
-                    title: "Unsweetened Iced Tea",
-                    detail: "Cold and flavorful without syrup",
+                    title: String(localized: "Unsweetened Iced Tea"),
+                    detail: String(localized: "Cold and flavorful without syrup"),
                     estimatedSugarGrams: 0.0
                 ),
                 SwapSuggestion(
-                    title: "Diet Soda",
-                    detail: "Closest flavor transition",
+                    title: String(localized: "Diet Soda"),
+                    detail: String(localized: "Closest flavor transition"),
                     estimatedSugarGrams: 0.0
                 )
             ]
@@ -80,18 +80,18 @@ struct SmartSwapEngine {
 
         return [
             SwapSuggestion(
-                title: "No Added Sugar Option",
-                detail: "Look for 'unsweetened' on front label",
+                title: String(localized: "No Added Sugar Option"),
+                detail: String(localized: "Look for 'unsweetened' on front label"),
                 estimatedSugarGrams: max(0, sugarGrams * 0.2)
             ),
             SwapSuggestion(
-                title: "Half-Portion Strategy",
-                detail: "Pair with protein to flatten cravings",
+                title: String(localized: "Half-Portion Strategy"),
+                detail: String(localized: "Pair with protein to flatten cravings"),
                 estimatedSugarGrams: sugarGrams * 0.5
             ),
             SwapSuggestion(
-                title: "Whole Food Alternative",
-                detail: "Swap processed snack for fruit + nuts",
+                title: String(localized: "Whole Food Alternative"),
+                detail: String(localized: "Swap processed snack for fruit + nuts"),
                 estimatedSugarGrams: 5.0
             )
         ]
@@ -166,9 +166,9 @@ final class ScannerViewModel {
 
     func streakRiskText(for addedSugar: Double) -> String {
         let remaining = predictedRemaining(after: addedSugar)
-        if remaining < 0 { return "High streak risk" }
-        if remaining < 5 { return "Medium streak risk" }
-        return "Low streak risk"
+        if remaining < 0 { return String(localized: "High streak risk") }
+        if remaining < 5 { return String(localized: "Medium streak risk") }
+        return String(localized: "Low streak risk")
     }
 
     func lookupBarcode(_ barcode: String, context: ModelContext) async {
@@ -185,7 +185,7 @@ final class ScannerViewModel {
             }
 
             state = .found(
-                name: product.productName ?? "Unknown Product",
+                name: product.productName ?? String(localized: "Unknown Product"),
                 brand: product.brands,
                 barcode: barcode,
                 sugarGrams: product.nutriments?.bestSugarEstimateGrams,
@@ -226,9 +226,9 @@ final class ScannerViewModel {
 
     func startRescueMode(context: ModelContext) {
         let options = [
-            "Take 90 seconds. Drink water first, then decide.",
-            "Try a protein snack first and re-check craving in 10 minutes.",
-            "Pick one Smart Swap option to protect today’s streak."
+            String(localized: "Take 90 seconds. Drink water first, then decide."),
+            String(localized: "Try a protein snack first and re-check craving in 10 minutes."),
+            String(localized: "Pick one Smart Swap option to protect today’s streak.")
         ]
         rescueModeMessage = options.randomElement()
         EventLogger.log(.rescueStarted, metadata: currentRiskLevel, context: context)

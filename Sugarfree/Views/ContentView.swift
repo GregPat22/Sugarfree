@@ -6,10 +6,20 @@ struct ContentView: View {
         case scan
         case log
         case goals
+        case settings
     }
 
     @State private var selectedTab: Tab = .dashboard
     @State private var dashboardRefreshToken = UUID()
+    @AppStorage("useLightAppearance") private var useLightAppearance = false
+    @AppStorage("appLanguageCode") private var appLanguageCode = "system"
+
+    private var appLocale: Locale {
+        if appLanguageCode == "system" {
+            return .autoupdatingCurrent
+        }
+        return Locale(identifier: appLanguageCode)
+    }
 
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -36,7 +46,15 @@ struct ContentView: View {
                 .tabItem {
                     Label("Goals", systemImage: "flame.fill")
                 }
+
+            SettingsView()
+                .tag(Tab.settings)
+                .tabItem {
+                    Label("Settings", systemImage: "gearshape.fill")
+                }
         }
+        .preferredColorScheme(useLightAppearance ? .light : nil)
+        .environment(\.locale, appLocale)
         .onChange(of: selectedTab) { _, newValue in
             if newValue == .dashboard {
                 dashboardRefreshToken = UUID()

@@ -53,7 +53,7 @@ struct ProductResultCard: View {
             if let riskText {
                 Text(riskText)
                     .font(.caption.weight(.semibold))
-                    .foregroundStyle(riskText.contains("High") ? .red : .orange)
+                    .foregroundStyle(isHighRisk(riskText) ? .red : .orange)
             }
 
             if sugarGrams != nil {
@@ -61,7 +61,7 @@ struct ProductResultCard: View {
             }
 
             if let servingSize {
-                Text("Serving: \(servingSize)")
+                Text(String(format: String(localized: "Serving: %@"), servingSize))
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
@@ -75,7 +75,7 @@ struct ProductResultCard: View {
                     .buttonStyle(.bordered)
 
                 if let total = adjustedSugar {
-                    Button("Add \(total, specifier: "%.1f")g") { onSave(total) }
+                    Button(String(format: String(localized: "Add %.1fg"), total)) { onSave(total) }
                         .buttonStyle(.borderedProminent)
                 } else {
                     Button("Enter Manually", action: onManualEntry)
@@ -212,5 +212,10 @@ struct ProductResultCard: View {
                 .buttonStyle(.plain)
             }
         }
+    }
+
+    private func isHighRisk(_ text: String) -> Bool {
+        let lower = text.lowercased()
+        return lower.contains("high") || lower.contains("alto")
     }
 }

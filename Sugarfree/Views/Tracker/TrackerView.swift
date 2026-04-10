@@ -44,7 +44,7 @@ struct TrackerView: View {
                                     Text(section.0)
                                     Spacer()
                                     let total = section.1.reduce(0.0) { $0 + $1.sugarGrams }
-                                    Text("\(total, specifier: "%.1f")g total")
+                                    Text(String(format: String(localized: "%.1fg total"), total))
                                         .font(.caption.monospacedDigit())
                                         .foregroundStyle(.secondary)
                                 }
@@ -117,8 +117,8 @@ struct TrackerView: View {
 
     private func dateLabel(for date: Date) -> String {
         let calendar = Calendar.current
-        if calendar.isDateInToday(date) { return "Today" }
-        if calendar.isDateInYesterday(date) { return "Yesterday" }
+        if calendar.isDateInToday(date) { return String(localized: "Today") }
+        if calendar.isDateInYesterday(date) { return String(localized: "Yesterday") }
         return date.formatted(.dateTime.weekday(.wide).month().day())
     }
 }

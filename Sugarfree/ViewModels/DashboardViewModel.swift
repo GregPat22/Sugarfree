@@ -33,9 +33,15 @@ final class DashboardViewModel {
     var predictiveBudgetMessage: String {
         let projectedRemaining = remainingGrams - 6 // default snack simulation
         if projectedRemaining >= 0 {
-            return String(format: "If your next snack is ~6g sugar, you'll still have %.1fg left.", projectedRemaining)
+            return String(
+                format: String(localized: "If your next snack is ~6g sugar, you'll still have %.1fg left."),
+                projectedRemaining
+            )
         }
-        return String(format: "A ~6g snack now would push today over by %.1fg.", -projectedRemaining)
+        return String(
+            format: String(localized: "A ~6g snack now would push today over by %.1fg."),
+            -projectedRemaining
+        )
     }
 
     func loadTodayData(context: ModelContext) {

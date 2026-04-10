@@ -31,9 +31,9 @@ struct ManualEntryForm: View {
         guard let sugar = Double(sugarGrams), sugar >= 0 else { return nil }
         let remaining = currentDailyLimit - (currentDayTotal + sugar)
         if remaining >= 0 {
-            return String(format: "After save: %.1fg left today", remaining)
+            return String(format: String(localized: "After save: %.1fg left today"), remaining)
         }
-        return String(format: "After save: %.1fg over limit", -remaining)
+        return String(format: String(localized: "After save: %.1fg over limit"), -remaining)
     }
 
     var body: some View {

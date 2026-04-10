@@ -44,8 +44,8 @@ struct BarcodeScannerView: View {
                                 guard let sugar else { return nil }
                                 let remaining = viewModel.predictedRemaining(after: sugar)
                                 return remaining >= 0
-                                    ? String(format: "After this entry: %.1fg left today", remaining)
-                                    : String(format: "After this entry: %.1fg over today", -remaining)
+                                    ? String(format: String(localized: "After this entry: %.1fg left today"), remaining)
+                                    : String(format: String(localized: "After this entry: %.1fg over today"), -remaining)
                             }(),
                             riskText: {
                                 guard let sugar else { return nil }
@@ -176,7 +176,7 @@ struct BarcodeScannerView: View {
                 .foregroundStyle(.orange)
             Text("Product not found")
                 .font(.headline)
-            Text("Barcode: \(barcode)")
+            Text(String(format: String(localized: "Barcode: %@"), barcode))
                 .font(.caption)
                 .foregroundStyle(.secondary)
 

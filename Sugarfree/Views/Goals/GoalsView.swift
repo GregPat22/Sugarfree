@@ -91,8 +91,8 @@ struct GoalsView: View {
                     Button("Use One Save") {
                         let used = viewModel.useInsurance(context: modelContext)
                         insuranceFeedback = used
-                            ? "Save applied. Your streak is protected for one slip day."
-                            : "No saves available yet. Keep streaking to earn one."
+                            ? String(localized: "Save applied. Your streak is protected for one slip day.")
+                            : String(localized: "No saves available yet. Keep streaking to earn one.")
                     }
                     .disabled(viewModel.insuranceCredits <= 0)
                 }
@@ -139,7 +139,9 @@ struct GoalsView: View {
     }
 
     private func streakText(_ days: Int) -> String {
-        days == 1 ? "1 day" : "\(days) days"
+        days == 1
+            ? String(localized: "1 day")
+            : String(format: String(localized: "%d days"), days)
     }
 }
 

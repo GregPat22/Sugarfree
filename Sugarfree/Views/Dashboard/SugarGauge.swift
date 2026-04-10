@@ -44,7 +44,7 @@ struct SugarGauge: View {
                         .foregroundStyle(isOver ? .red : .primary)
                         .contentTransition(.numericText())
 
-                    Text("of \(limit, specifier: "%.0f")g")
+                    Text(String(format: String(localized: "of %.0fg"), limit))
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
@@ -53,12 +53,12 @@ struct SugarGauge: View {
 
             if isOver {
                 let over = consumed - limit
-                Text("\(over, specifier: "%.0f")g over limit")
+                Text(String(format: String(localized: "%.0fg over limit"), over))
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(.red)
             } else {
                 let remaining = limit - consumed
-                Text("\(remaining, specifier: "%.0f")g remaining")
+                Text(String(format: String(localized: "%.0fg remaining"), remaining))
                     .font(.caption.weight(.medium))
                     .foregroundStyle(.secondary)
             }
