@@ -7,6 +7,7 @@ final class BarcodeCaptureCoordinator: NSObject, AVCaptureMetadataOutputObjectsD
 
     private var isConfigured = false
     private var lastDetection = Date.distantPast
+    private let sessionQueue = DispatchQueue(label: "com.sugarfree.camera.session", qos: .userInitiated)
 
     private let supportedTypes: [AVMetadataObject.ObjectType] = [
         .ean13, .ean8, .upce, .code128, .code39, .code93, .itf14
@@ -16,7 +17,7 @@ final class BarcodeCaptureCoordinator: NSObject, AVCaptureMetadataOutputObjectsD
         guard !isConfigured else { return }
         isConfigured = true
 
-        DispatchQueue.global(qos: .userInitiated).async { [self] in
+        sessionQueue.async { [self] in
             session.beginConfiguration()
 
             guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back),
@@ -46,14 +47,14 @@ final class BarcodeCaptureCoordinator: NSObject, AVCaptureMetadataOutputObjectsD
     }
 
     func start() {
-        DispatchQueue.global(qos: .userInitiated).async { [self] in
+        sessionQueue.async { [self] in
             guard !session.isRunning else { return }
             session.startRunning()
         }
     }
 
     func stop() {
-        DispatchQueue.global(qos: .userInitiated).async { [self] in
+        sessionQueue.async { [self] in
             guard session.isRunning else { return }
             session.stopRunning()
         }

@@ -126,6 +126,9 @@ struct BarcodeScannerView: View {
                 await requestCameraAccess()
                 setupCoordinator()
             }
+            .onAppear {
+                resumeScanner()
+            }
             .onDisappear {
                 coordinator.stop()
             }
@@ -254,6 +257,12 @@ struct BarcodeScannerView: View {
         } else {
             cameraPermission = status
         }
+    }
+
+    private func resumeScanner() {
+        guard cameraPermission == .authorized else { return }
+        viewModel.reset()
+        coordinator.start()
     }
 }
 
